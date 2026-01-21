@@ -10,6 +10,4 @@ typedef struct {
     uint16_t stack[16];
 	uint8_t sp;       //stack pointer
 	uint8_t display[64*32]; //display pixels
-}chip8;
-void chip8_init(chip8 *);
-short chip8_load_ROM(chip8 *, const char *);
+}chip8;	
