@@ -1,3 +1,5 @@
+#ifndef CHIP8_H
+#define CHIP8_H
 #include <stdint.h>
 //the main struct which will be used throught the project
 typedef struct {
@@ -10,4 +12,10 @@ typedef struct {
     uint16_t stack[16];
 	uint8_t sp;       //stack pointer
 	uint8_t display[64*32]; //display pixels
-}chip8;	
+	uint8_t keys[16]; //input keys active on high state
+}chip8;
+void chip8_init(chip8 *);
+short chip8_load_ROM(chip8 *, const char*);
+void chip8_draw_text(const chip8 *);
+void chip8_step(chip8 *);
+#endif
