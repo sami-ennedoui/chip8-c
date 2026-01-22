@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdint.h>
+#include <SDL3/SDL_scancode.h>
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
+#include <SDL3/SDL_log.h>
 #include <SDL3/SDL_render.h>
 #include "../src/chip8.h"
 
@@ -32,12 +34,36 @@ static void render_pixels(SDL_Renderer *renderer, const uint8_t *display) {
 
     SDL_RenderPresent(renderer);
 }
+static int map_key(SDL_Keycode key) {
+	switch (key) {
+    case SDL_SCANCODE_1: return 0x1;
+    case SDL_SCANCODE_2: return 0x2;
+    case SDL_SCANCODE_3: return 0x3;
+    case SDL_SCANCODE_4: return 0xC;
 
+    case SDL_SCANCODE_Q: return 0x4;
+    case SDL_SCANCODE_W: return 0x5;
+    case SDL_SCANCODE_E: return 0x6;
+    case SDL_SCANCODE_R: return 0xD;
+
+    case SDL_SCANCODE_A: return 0x7;
+    case SDL_SCANCODE_S: return 0x8;
+    case SDL_SCANCODE_D: return 0x9;
+    case SDL_SCANCODE_F: return 0xE;
+
+    case SDL_SCANCODE_Z: return 0xA;
+    case SDL_SCANCODE_X: return 0x0;
+    case SDL_SCANCODE_C: return 0xB;
+    case SDL_SCANCODE_V: return 0xF;
+
+    default: return -1;
+    }
+}
 int main(int argc, char **argv) {
     chip8 chip;
     chip8_init(&chip);
 
-    if (!chip8_load_ROM(&chip, "../src/IBM_Logo.ch8")) {
+    if (!chip8_load_ROM(&chip, "../src/Pong_1p.ch8")) {
         printf("Failed to load ROM\n");
         return 1;
     }
@@ -75,15 +101,27 @@ int main(int argc, char **argv) {
             if (e.type == SDL_EVENT_QUIT) {
                 running = 0;
             }
+if (e.type == SDL_EVENT_KEY_DOWN || e.type == SDL_EVENT_KEY_UP) {
+        int idx = map_key(e.key.scancode);
+        if (idx >= 0 && idx < 16) {
+            chip.keys[idx] = (e.type == SDL_EVENT_KEY_DOWN) ? 1 : 0;
         }
-
+    }
+}
+static uint32_t last_tick = 0;
+uint32_t now = SDL_GetTicks();
+if (now - last_tick >= 1000 / 60) {
+    if (chip.delay_timer > 0) chip.delay_timer--;
+    if (chip.sound_timer > 0) chip.sound_timer--;
+    last_tick = now;
+}
         for (int i = 0; i < CYCLES_PER_FRAME; i++) {
             chip8_step(&chip);
         }
 
         render_pixels(renderer, chip.display);
 
-        SDL_Delay(1);
+        SDL_Delay(10);
     }
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(win);
