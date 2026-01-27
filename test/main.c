@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <SDL3/SDL_scancode.h>
+#include <SDL3/SDL_timer.h>
+#include <SDL3/SDL_video.h>
 #include <SDL3/SDL.h>
+#include <SDL3/SDL_events.h>
 #include <SDL3/SDL_main.h>
 #include <SDL3/SDL_log.h>
 #include <SDL3/SDL_render.h>
@@ -62,8 +65,7 @@ static int map_key(SDL_Keycode key) {
 int main(int argc, char **argv) {
     chip8 chip;
     chip8_init(&chip);
-
-    if (!chip8_load_ROM(&chip, "../src/Pong_1p.ch8")) {
+    if (!chip8_load_ROM(&chip, "../src/keypad_test.ch8")) {
         printf("Failed to load ROM\n");
         return 1;
     }
@@ -108,6 +110,7 @@ if (e.type == SDL_EVENT_KEY_DOWN || e.type == SDL_EVENT_KEY_UP) {
         }
     }
 }
+//to do : find a better approach to handle timing issues to fix games not working issues 
 static uint32_t last_tick = 0;
 uint32_t now = SDL_GetTicks();
 if (now - last_tick >= 1000 / 60) {
