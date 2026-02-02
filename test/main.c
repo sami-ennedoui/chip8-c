@@ -65,7 +65,7 @@ static int map_key(SDL_Keycode key) {
 int main(int argc, char **argv) {
     chip8 chip;
     chip8_init(&chip);
-    if (!chip8_load_ROM(&chip, "../src/keypad_test.ch8")) {
+    if (!chip8_load_ROM(&chip, "../src/Pong_1p.ch8")) {
         printf("Failed to load ROM\n");
         return 1;
     }
@@ -131,4 +131,3 @@ if (now - last_tick >= 1000 / 60) {
     SDL_Quit();
     return 0;
 }
-

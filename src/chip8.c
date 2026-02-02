@@ -186,9 +186,9 @@ void chip8_step(chip8 *c){
                 for (int u = 0; u<8 ; u++){
                     uint8_t sprite_pixel = (sprite_byte >> (7 - u)) & 1;//extracting the 7-u th bit to get a single bit (1 or 0)
                     if (sprite_pixel) {
-                        int y = (c->v[y] + h) % 32; // % handles the wrapping of the pixels in case it excceeds the limits of the screen
-                        int x = (c->v[x] + u) % 64;
-                        int index = y * 64 + x;
+                        int sy = (c->v[y] + h) % 32; // % handles the wrapping of the pixels in case it excceeds the limits of the screen
+                        int sx = (c->v[x] + u) % 64;
+                        int index = sy * 64 + sx;
                         uint8_t old_pixel = c->display[index];
                          c->display[index] ^= 1;
                         if (old_pixel == 1 && c->display[index] == 0){
@@ -200,7 +200,7 @@ void chip8_step(chip8 *c){
         break;
         case 0xE000:
             if ((opcode & 0x00FF) == 0x009E){//SKP
-                if(c->keys[c->v[x]] == 1){
+                if(c->keys[c->v[x]] != 0){
                     c->pc += 2;
                 }
             } 
