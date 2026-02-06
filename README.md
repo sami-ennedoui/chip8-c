@@ -17,16 +17,16 @@ clone the repo :
 ## Changing the ROM file
 For now, to change the rom file you need to change it from the main.c file located in the test directory, specifically in **line 68** to do that
 First clone the repo:
-`git clone https://github.com/yourusername/chip8.git` </br>
-Change into the chip8 directory:
-`cd chip8`
-Navigate to the **test** directory:
-`cd test`
-Using your text editor of choice you can change the line 68 to the rom of you want to load.
-Now use the Mafile to compile to code
-`make ..`
-you may then run the file named `chip8_sdl.exe` using `./chip8_sdl.exe`
-To update the .exe in the game directory use:
-`unzip ../game -d ../. && mv chip8_sdl.exe ../game`
-You can now run the game using:
-`cd ../game && ./chip8_sdl.exe`
+`git clone https://github.com/sami-ennedoui/chip8.git` </br>
+Change into the chip8 directory: </br>
+`cd chip8`</br>
+Navigate to the **test** directory:</br>
+`cd test`</br>
+Using your text editor of choice you can change the line 68 to the rom of you want to load.</br>
+Now use the Mafile to compile to code</br>
+`make ..`</br>
+you may then run the file named `chip8_sdl.exe` using `./chip8_sdl.exe`</br>
+To update the .exe in the game directory use:</br>
+`unzip ../game -d ../. && mv chip8_sdl.exe ../game`</br>
+You can now run the game using:</br>
+`cd ../game && ./chip8_sdl.exe`</br>
