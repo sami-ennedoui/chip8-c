@@ -14,8 +14,19 @@ This project was created with the goal of making a spec-compliant chip8 emulator
 - unit tests using Ctest.
 - Graphics using the SDL3 libary.
 clone the repo : 
-## Quick start
+## Changing the ROM file
+For now, to change the rom file you need to change it from the main.c file located in the test directory, specifically in **line 68** to do that
 First clone the repo:
 `git clone https://github.com/yourusername/chip8.git` </br>
 Change into the chip8 directory:
 `cd chip8`
+Navigate to the **test** directory:
+`cd test`
+Using your text editor of choice you can change the line 68 to the rom of you want to load.
+Now use the Mafile to compile to code
+`make ..`
+you may then run the file named `chip8_sdl.exe` using `./chip8_sdl.exe`
+To update the .exe in the game directory use:
+`unzip ../game -d ../. && mv chip8_sdl.exe ../game`
+You can now run the game using:
+`cd ../game && ./chip8_sdl.exe`
