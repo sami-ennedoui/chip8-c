@@ -23,7 +23,7 @@ Change into the chip8 directory: </br>
 Navigate to the **test** directory:</br>
 `cd test`</br>
 Using your text editor of choice you can change the line 68 to the rom of you want to load.</br>
-Now use the Mafile to compile to code</br>
+Now use the Makefile to compile to code</br>
 `make ..`</br>
 you may then run the file named `chip8_sdl.exe` using `./chip8_sdl.exe`</br>
 To update the .exe in the game directory use:</br>
