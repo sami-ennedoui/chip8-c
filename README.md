@@ -13,7 +13,6 @@ This project was created with the goal of making a spec-compliant chip8 emulator
 - programming language used: C.
 - unit tests using Ctest.
 - Graphics using the SDL3 libary.
-clone the repo : 
 ## Changing the ROM file
 For now, to change the rom file you need to change it from the main.c file located in the test directory, specifically in **line 68** to do that
 First clone the repo:
