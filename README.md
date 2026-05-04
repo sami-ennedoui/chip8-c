@@ -1,31 +1,67 @@
 # chip8-c
-### What is chip8?
-Chip8 is an interpreted programming language, made in the 1970s with the goal of being less memory intensive than other languages that were used at the time like BASIC. ( Chip8 needed only 4 kilobytes of memory to run programs the same as the APOLLO guidance computer!).
-The language has been used in many applications like video game consoles, home computers, calculators and so on.
+
+![Pong demo](pong_demo.gif)
+
+### What is CHIP-8?
+CHIP-8 is an interpreted programming language from the 1970s, designed to be less memory-intensive than languages like BASIC at the time — it needed only 4 kilobytes of RAM, the same as the Apollo guidance computer.
+It has been used across video game consoles, home computers, and calculators.
+
 ### Project overview
-This project was created with the goal of making a spec-compliant chip8 emulator/virtual machine with support for its modern opcodes, monochrome graphics and keyboard inputs. The project aims to test and increase my understanding of the C programming language and my knowledge of computer architecture. This project has been successful so far in providing the MVP I intended but improvements are still to be done in the future ( for instance audio support) 
+A spec-compliant CHIP-8 emulator/VM written in C, with monochrome graphics via SDL3 and full keyboard input support. Built to deepen understanding of C and computer architecture. Audio support is planned for a future update.
+
 ## Feature set
-- full instruction set support to the chip8 standart
-- 4kB of memory, 16 registers named V0 through VF, a 16 bit index, stack support for calls and returns as well as a program counter.
-- keyboard support tested using the keypad_test.ch8 ROM.
-- Full support for .ch8 ROMs.
+- Full CHIP-8 instruction set
+- 4 kB memory, 16 registers (V0–VF), 16-bit index register, stack, program counter
+- Keyboard input (tested with `keypad_test.ch8`)
+- Full `.ch8` ROM support
+
 ## Tools used
-- programming language used: C.
-- unit tests using Ctest.
-- Graphics using the SDL3 libary.
-## Changing the ROM file
-For now, to change the rom file you need to change it from the main.c file located in the test directory, specifically in **line 68** to do that
-First clone the repo:
-`git clone https://github.com/sami-ennedoui/chip8.git` </br>
-Change into the chip8 directory: </br>
-`cd chip8`</br>
-Navigate to the **test** directory:</br>
-`cd test`</br>
-Using your text editor of choice you can change the line 68 to the rom of you want to load.</br>
-Now use the Makefile to compile to code</br>
-`make ..`</br>
-you may then run the file named `chip8_sdl.exe` using `./chip8_sdl.exe`</br>
-To update the .exe in the game directory use:</br>
-`unzip ../game -d ../. && mv chip8_sdl.exe ../game`</br>
-You can now run the game using:</br>
-`cd ../game && ./chip8_sdl.exe`</br>
+- Language: C
+- Graphics: SDL3
+- Build: Make + pkg-config
+
+## Building
+
+### Linux
+Install SDL3:
+```bash
+# Fedora
+sudo dnf install SDL3-devel
+
+# Ubuntu/Debian
+sudo apt install libsdl3-dev
+```
+Then build:
+```bash
+git clone https://github.com/sami-ennedoui/chip8-c.git
+cd chip8-c
+make
+```
+
+### Windows (MSYS2)
+Install SDL3 via pacman:
+```bash
+pacman -S mingw-w64-ucrt-x86_64-SDL3
+```
+Then build the same way:
+```bash
+make
+```
+
+## Running
+Pass the path to any `.ch8` ROM as an argument:
+```bash
+./chip8 src/Pong_1p.ch8
+./chip8 src/IBM_Logo.ch8
+./chip8 src/david_winters_space_invaders.ch8
+```
+
+## Keypad mapping
+The original CHIP-8 keypad maps to your keyboard as follows:
+
+| CHIP-8 | Keyboard |
+|--------|----------|
+| 1 2 3 C | 1 2 3 4 |
+| 4 5 6 D | Q W E R |
+| 7 8 9 E | A S D F |
+| A 0 B F | Z X C V |
