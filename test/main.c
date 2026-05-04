@@ -12,7 +12,7 @@
 
 #define DISPLAY_WIDTH  64
 #define DISPLAY_HEIGHT 32
-#define SCALE          10
+#define SCALE          15
 #define CYCLES_PER_FRAME 10
 
 static void render_pixels(SDL_Renderer *renderer, const uint8_t *display) {
