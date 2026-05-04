@@ -30,14 +30,14 @@ static void render_pixels(SDL_Renderer *renderer, const uint8_t *display) {
                 r.y = y * SCALE;
                 r.w = SCALE;
                 r.h = SCALE;
-                SDL_RenderRect(renderer, &r);
+                SDL_RenderFillRect(renderer, &r);
             }
         }
     }
 
     SDL_RenderPresent(renderer);
 }
-static int map_key(SDL_Keycode key) {
+static int map_key(SDL_Scancode key) {
 	switch (key) {
     case SDL_SCANCODE_1: return 0x1;
     case SDL_SCANCODE_2: return 0x2;
@@ -63,9 +63,13 @@ static int map_key(SDL_Keycode key) {
     }
 }
 int main(int argc, char **argv) {
+    if (argc < 2) {
+        printf("Usage: %s <rom_path>\n", argv[0]);
+        return 1;
+    }
     chip8 chip;
     chip8_init(&chip);
-    if (!chip8_load_ROM(&chip, "../src/Pong_1p.ch8")) {
+    if (!chip8_load_ROM(&chip, argv[1])) {
         printf("Failed to load ROM\n");
         return 1;
     }
